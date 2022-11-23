@@ -1,0 +1,4 @@
+name = "PyPrint"
+uuid = "302eade5-f262-4753-bf72-f2441e1ae844"
+authors = ["Stephen Huan <stephen03.huan@gmail.com>"]
+version = "0.1.0"
