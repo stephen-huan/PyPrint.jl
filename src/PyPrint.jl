@@ -20,12 +20,15 @@ For additional information and customization, see:
 - [https://docs.julialang.org/en/v1/base/io-network/#Base.IOContext]
   (https://docs.julialang.org/en/v1/base/io-network/#Base.IOContext)
 """
-prepr(x) = repr("text/plain", x;
-                context=IOContext(stdout,
-                                  :limit => true,
-                                  :displaysize => (11, 80),
-                                 )
-               )
+prepr(x) = repr(
+    "text/plain",
+    x;
+    context=IOContext(
+        stdout,
+        :limit => true,
+        :displaysize => (11, 80),
+    )
+)
 prepr(x::AbstractString) = x
 prepr(x::AbstractChar) = x
 """
@@ -35,8 +38,9 @@ Pretty-print `x`, joining multiple arguments with a space like in Python.
 
 Uses [`prepr`](@ref) to get the string representation of `x`.
 """
-pprint(x...) = print(join(prepr(y) for x in zip(x, " "^length(x)) for y in x),
-                     "\n")
+pprint(x...) = print(
+    join(prepr(y) for x in zip(x, " "^length(x)) for y in x), "\n"
+)
 
 """
     @pprint exs...
@@ -48,8 +52,13 @@ Copied from the implementation of [`@show`](@ref).
 macro pprint(exs...)
     blk = Expr(:block)
     for ex in exs
-        push!(blk.args, :(println($(sprint(show,ex)*" = "),
-                                  prepr(begin local value = $(esc(ex)) end))))
+        push!(
+            blk.args,
+            :(println(
+                $(sprint(show,ex)*" = "),
+                prepr(begin local value = $(esc(ex)) end)
+            ))
+        )
     end
     isempty(exs) || push!(blk.args, :value)
     return blk
