@@ -14,11 +14,10 @@ export pprint, @pprint
 Return the human-readable string representation of `x`, like in the REPL.
 
 Suppress quotes around strings and Unicode codepoint printing of characters.
+
 For additional information and customization, see:
-- [https://stackoverflow.com/questions/40788316/40794864#40794864]
-  (https://stackoverflow.com/questions/40788316/40794864#40794864)
-- [https://docs.julialang.org/en/v1/base/io-network/#Base.IOContext]
-  (https://docs.julialang.org/en/v1/base/io-network/#Base.IOContext)
+- <https://stackoverflow.com/a/40794864>
+- <https://docs.julialang.org/en/v1/base/io-network/#Base.IOContext>
 """
 function prepr(io::IO, x)
     return repr(
